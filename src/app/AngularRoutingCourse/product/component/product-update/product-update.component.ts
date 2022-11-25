@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'src/AngularRoutingCourse/messages/service/message.service';
+import { MessageService } from 'src/app/AngularRoutingCourse/messages/service/message.service';
 import { Product } from '../../model/product';
 import { ProductService } from '../../service/product.service';
 

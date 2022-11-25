@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/AngularRoutingCourse/user/service/user.service';
-
+import { UserService } from 'src/app/AngularRoutingCourse/user/service/user.service';
+ 
 @Component({
   selector: 'app-wellcome',
   templateUrl: './wellcome.component.html',

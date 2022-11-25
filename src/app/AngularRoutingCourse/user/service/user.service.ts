@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MessageService } from 'src/AngularRoutingCourse/messages/service/message.service';
+import { MessageService } from '../../messages/service/message.service';
 import { User } from '../model/user';
 
 @Injectable({

@@ -1,5 +1,8 @@
 # install packages 
-1. npm i angular-in-memory-web-api
+1. npm i angular-in-memory-web-api 
+or that run successfully with me 
+1.1 npm i angular-in-memory-web-api@0.13.0 --save-dev
+2. ng add @ng-bootstrap/ng-bootstrap
 # slove errors 
 1. npm config set legacy-peer-deps true
 # AngularRouteCourse
