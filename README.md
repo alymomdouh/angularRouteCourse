@@ -1,3 +1,7 @@
+# install packages 
+1. npm i angular-in-memory-web-api
+# slove errors 
+1. npm config set legacy-peer-deps true
 # AngularRouteCourse
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2.
