@@ -11,6 +11,9 @@ import { StarComponent } from './components/star/star.component';
   imports: [
     CommonModule,
     SharedRoutingModule
+  ],
+  exports: [
+    StarComponent
   ]
 })
 export class SharedModule { }
