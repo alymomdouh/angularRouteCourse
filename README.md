@@ -5,6 +5,8 @@ or that run successfully with me
 2. ng add @ng-bootstrap/ng-bootstrap
 # slove errors 
 1. npm config set legacy-peer-deps true
+# publish project to github server must build and convert output path to docs directory
+1. npx ng build angularRouteCourse --configuration=development
 # AngularRouteCourse
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.2.
