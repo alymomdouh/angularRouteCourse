@@ -12,6 +12,14 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'index' },
       { path: 'index', component: WellcomeComponent }
     ]
+  }, 
+  {
+    path: 'Product',
+    loadChildren: () => import('../product/product.module').then(m => m.ProductModule) 
+  },
+  {
+    path: 'User',
+    loadChildren: () => import('../user/user.module').then(m => m.UserModule)
   },
   { path: '**', component: PageNotFoundComponent },
 ];

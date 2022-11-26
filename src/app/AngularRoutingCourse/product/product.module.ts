@@ -7,6 +7,8 @@ import { ProductUpdateComponent } from './component/product-update/product-updat
 import { SharedModule } from '../shared/shared.module';
 import { ProductUpdateTagsComponent } from './component/product-update-tags/product-update-tags.component';
 import { ProductUpdateInfoComponent } from './component/product-update-info/product-update-info.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,6 +22,12 @@ import { ProductUpdateInfoComponent } from './component/product-update-info/prod
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    /***  
+    */
+    RouterModule.forChild([
+      { path: "list", component: ProductListComponent }
+    ]),
     ProductRoutingModule
   ],
   exports: [

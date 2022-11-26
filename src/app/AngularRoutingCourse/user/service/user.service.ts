@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from '../../messages/service/message.service';
 import { User } from '../model/user';
 
@@ -7,10 +8,15 @@ import { User } from '../model/user';
 })
 export class UserService {
   currentUser?: User | undefined;
+  redirectUrl = '';
+
   get isLoggedIn(): boolean {
     return !!this.currentUser;
   }
-  constructor(private messageService: MessageService) { }
+
+  constructor(private messageService: MessageService,
+    private router: Router) { }
+
   login(userName: string, password: string): void {
     if (!userName || !password) {
       this.messageService.addMessage('Please enter your userName and password');
@@ -34,5 +40,7 @@ export class UserService {
   }
   logout(): void {
     this.currentUser = undefined;
+    this.router.navigate(['/Home/index']);
+    // this.router.navigateByUrl('/Home/index');
   }
 }

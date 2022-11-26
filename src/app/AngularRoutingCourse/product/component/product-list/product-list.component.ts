@@ -8,18 +8,26 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  pageTitle = 'Product Detail';
+  pageTitle = 'Product List';
   product: Product | null = null;
   errorMessage = '';
+  imageMargin: number = 10;
+  showImage = false;
+  imageWidth = 200;
+  filteredProducts = null;
+  listFilter = null;
+  products: Product[] = [];
   constructor(private productService: ProductService) { }
   ngOnInit() { }
   getProduct(id: number): void {
     this.productService.getProduct(id).subscribe({
-      next: product => this.onProductRetrieved(product),
-      error: err => this.errorMessage = err
+      next: (product: Product) => this.onProductRetrieved(product),
+      error: (err: string) => this.errorMessage = err
     });
   }
+  toggleImage() {
 
+  }
   onProductRetrieved(product: Product): void {
     this.product = product;
 
