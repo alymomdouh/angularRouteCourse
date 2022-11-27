@@ -40,7 +40,7 @@ export class UserService {
   }
   logout(): void {
     this.currentUser = undefined;
-    this.router.navigate(['/Home/index']);
-    // this.router.navigateByUrl('/Home/index');
+    this.router.navigate(['/index']);
+    // this.router.navigateByUrl('/index');
   }
 }

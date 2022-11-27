@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../model/product';
 import { ProductService } from '../../service/product.service';
 
@@ -9,32 +10,39 @@ import { ProductService } from '../../service/product.service';
 })
 export class ProductListComponent implements OnInit {
   pageTitle = 'Product List';
-  product: Product | null = null;
-  errorMessage = '';
-  imageMargin: number = 10;
+  imageWidth = 50;
+  imageMargin = 2;
   showImage = false;
-  imageWidth = 200;
-  filteredProducts = null;
-  listFilter = null;
+  errorMessage = '';
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this.listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+  filteredProducts: Product[] = [];
   products: Product[] = [];
-  constructor(private productService: ProductService) { }
-  ngOnInit() { }
-  getProduct(id: number): void {
-    this.productService.getProduct(id).subscribe({
-      next: (product: Product) => this.onProductRetrieved(product),
-      error: (err: string) => this.errorMessage = err
+  constructor(private productService: ProductService,
+    private route: ActivatedRoute) { }
+  ngOnInit(): void {
+    this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || '';
+    this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true';
+    this.productService.getProducts().subscribe({
+      next: products => {
+        this.products = products;
+        this.filteredProducts = this.performFilter(this.listFilter);
+      },
+      error: err => this.errorMessage = err
     });
   }
-  toggleImage() {
-
+  performFilter(filterBy: string): Product[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: Product) =>
+      product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
-  onProductRetrieved(product: Product): void {
-    this.product = product;
-
-    if (this.product) {
-      this.pageTitle = `Product Detail: ${this.product.productName}`;
-    } else {
-      this.pageTitle = 'No product found';
-    }
+  toggleImage(): void {
+    this.showImage = !this.showImage;
   }
 }
