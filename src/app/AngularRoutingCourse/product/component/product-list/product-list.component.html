@@ -39,7 +39,8 @@
                                 [style.margin.px]="imageMargin">
                         </td>
                         <td>
-                            <a [routerLink]="[product.id]" [queryParams]="{filterBy: listFilter, showImage: showImage}">
+                            <a routerLink="/AngularRoutingCourse/Product/details/{{product.id}}"
+                                [queryParams]="{filterBy: listFilter, showImage: showImage}">
                                 {{ product.productName }}
                             </a>
                         </td>
@@ -51,7 +52,8 @@
                             </app-star>
                         </td>
                         <td>
-                            <button class="btn btn-outline-primary btn-sm" [routerLink]="[product.id, 'edit']">
+                            <button class="btn btn-outline-primary btn-sm"
+                                routerLink="/AngularRoutingCourse/Product/update/{{product.id}}">
                                 Edit
                             </button>
                         </td>

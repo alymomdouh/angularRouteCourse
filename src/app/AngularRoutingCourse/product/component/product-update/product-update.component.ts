@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/AngularRoutingCourse/messages/service/message.service';
 import { Product } from '../../model/product';
 import { ProductService } from '../../service/product.service';
@@ -13,8 +14,12 @@ export class ProductUpdateComponent implements OnInit {
   errorMessage = '';
   product: Product | null = null;
   constructor(private productService: ProductService,
-    private messageService: MessageService) { }
-  ngOnInit() { }
+    private messageService: MessageService, private route: ActivatedRoute,
+    private router: Router) { }
+  ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id')!;
+    this.getProduct(id);
+  }
   getProduct(id: number): void {
     this.productService.getProduct(id).subscribe({
       next: product => this.onProductRetrieved(product),
