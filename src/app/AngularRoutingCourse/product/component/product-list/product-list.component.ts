@@ -27,6 +27,9 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService,
     private route: ActivatedRoute) { }
   ngOnInit(): void {
+    // get data that send from in rout component 
+    const data = this.route.snapshot.data['pageTitle'];
+
     this.listFilter = this.route.snapshot.queryParamMap.get('filterBy') || '';
     this.showImage = this.route.snapshot.queryParamMap.get('showImage') === 'true';
     this.productService.getProducts().subscribe({

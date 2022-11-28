@@ -4,8 +4,14 @@ import { ProductDetailsComponent } from './component/product-details/product-det
 import { ProductListComponent } from './component/product-list/product-list.component';
 import { ProductUpdateComponent } from './component/product-update/product-update.component';
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'list' }, 
-  { path: "list", component: ProductListComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'list' },
+  {
+    path: "list",
+    component: ProductListComponent,
+    data: {
+      pageTitle: "Product List"
+    }
+  },
   { path: "details/:id", component: ProductDetailsComponent },
   { path: "update/:id", component: ProductUpdateComponent },
   { path: "create", component: ProductUpdateComponent }
