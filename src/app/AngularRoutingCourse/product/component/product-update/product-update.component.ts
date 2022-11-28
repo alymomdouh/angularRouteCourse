@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/AngularRoutingCourse/messages/service/message.service';
-import { Product } from '../../model/product';
+import { Product, ProductResolved } from '../../model/product';
 import { ProductService } from '../../service/product.service';
 
 @Component({
@@ -17,8 +17,12 @@ export class ProductUpdateComponent implements OnInit {
     private messageService: MessageService, private route: ActivatedRoute,
     private router: Router) { }
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get('id')!;
-    this.getProduct(id);
+    // const id = +this.route.snapshot.paramMap.get('id')!;
+    // this.getProduct(id);
+    // we not need git id and service for product only need resolver
+    const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
+    this.errorMessage = resolvedData.error!;
+    this.onProductRetrieved(resolvedData.product!);
   }
   getProduct(id: number): void {
     this.productService.getProduct(id).subscribe({

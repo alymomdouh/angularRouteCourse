@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Product } from '../../model/product';
+import { Product, ProductResolved } from '../../model/product';
 import { ProductService } from '../../service/product.service';
 
 @Component({
@@ -10,8 +10,12 @@ import { ProductService } from '../../service/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id')!;
-    this.getProduct(id);
+    // const id = +this.route.snapshot.paramMap.get('id')!;
+    // this.getProduct(id);
+    // we not need git id and service for product only need resolver
+    const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
+    this.errorMessage = resolvedData.error!;
+    this.onProductRetrieved(resolvedData.product!);
   }
   pageTitle = 'Product Detail';
   product: Product | null = null;

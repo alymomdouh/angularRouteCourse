@@ -16,14 +16,14 @@ const routes: Routes = [
   {
     path: "details/:id",
     component: ProductDetailsComponent,
-    resolve: { resolvedData: ProductResolverService }
+    resolve: { Product: ProductResolverService }
     // if we need send multi resolver
     //resolve: { Product: ProductResolverService, category: categoryResolverService }
   },
   {
     path: "update/:id",
     component: ProductUpdateComponent,
-    resolve: { resolvedData: ProductResolverService }
+    resolve: { Product: ProductResolverService }
   },
   { path: "create", component: ProductUpdateComponent }
 ];
