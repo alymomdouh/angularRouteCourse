@@ -11,6 +11,7 @@ export interface Product {
   starRating: number;
   imageUrl: string;
 }
+
 export interface ProductResolved {
   product: Product | null;
   error?: string;
