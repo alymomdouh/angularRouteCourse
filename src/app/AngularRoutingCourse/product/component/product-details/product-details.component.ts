@@ -12,10 +12,18 @@ export class ProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     // const id = +this.route.snapshot.paramMap.get('id')!;
     // this.getProduct(id);
+
     // we not need git id and service for product only need resolver
-    const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
-    this.errorMessage = resolvedData.error!;
-    this.onProductRetrieved(resolvedData.product!);
+    // const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
+    // this.errorMessage = resolvedData.error!;
+    // this.onProductRetrieved(resolvedData.product!);
+
+    // read data as subscribe not property
+    this.route.data.subscribe(data=>{
+      const resolvedData: ProductResolved = data["Product"];
+      this.errorMessage = resolvedData.error!;
+      this.onProductRetrieved(resolvedData.product!);
+    });
   }
   pageTitle = 'Product Detail';
   product: Product | null = null;
