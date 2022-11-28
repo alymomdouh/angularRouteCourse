@@ -39,6 +39,7 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
   deleteProduct(): void {
+    //if (this.product.id===0) {
     if (!this.product || !this.product.id) {
       // Don't delete, it was never saved.
       this.onSaveComplete(`${this.product?.productName} was deleted`);
@@ -73,6 +74,11 @@ export class ProductUpdateComponent implements OnInit {
       this.messageService.addMessage(message);
     }
     // Navigate back to the product list
+    this.router.navigate(['/AngularRoutingCourse/Product/list']);
+    // this.router.navigate(['/AngularRoutingCourse/Product/list'],
+    //   { queryParams: { filterBy: "", showImage: "Show" } }// Hide
+    // );
+
   }
 }
 
