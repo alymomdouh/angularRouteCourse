@@ -9,6 +9,7 @@ import { ProductUpdateTagsComponent } from './component/product-update-tags/prod
 import { ProductUpdateInfoComponent } from './component/product-update-info/product-update-info.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ProductEasyUpdateComponent } from './component/product-easy-update/product-easy-update.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     ProductDetailsComponent,
     ProductUpdateComponent,
     ProductUpdateTagsComponent,
-    ProductUpdateInfoComponent
+    ProductUpdateInfoComponent,
+    ProductEasyUpdateComponent
   ],
   imports: [
     CommonModule,
