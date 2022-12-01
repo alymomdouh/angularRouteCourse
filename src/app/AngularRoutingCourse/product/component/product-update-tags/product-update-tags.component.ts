@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Product, ProductResolved } from '../../model/product';
 
 @Component({
   selector: 'app-product-update-tags',
@@ -7,11 +8,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-update-tags.component.css']
 })
 export class ProductUpdateTagsComponent implements OnInit {
-  errorMessage = '';
+  errorMessage: string = '';
   newTags = '';
-  product = { id: 1, category: 'test', tags: ['test'] };
+  product: Product | null = null;
   constructor(private route: ActivatedRoute) { }
   ngOnInit(): void {
+    this.route?.parent?.data.subscribe(data => {
+      const resolvedData: ProductResolved = data["Product"];
+      this.product = resolvedData.product;
+      this.errorMessage = resolvedData.error!;
+    });
   }
   // Add the defined tags
   addTags(): void {

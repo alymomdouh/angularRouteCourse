@@ -11,7 +11,7 @@ import { ProductService } from '../../service/product.service';
 })
 export class ProductUpdateComponent implements OnInit {
   pageTitle = 'Product Edit';
-  errorMessage = '';
+  errorMessage?: string;
   product: Product | null = null;
   constructor(private productService: ProductService,
     private messageService: MessageService, private route: ActivatedRoute,
@@ -22,15 +22,17 @@ export class ProductUpdateComponent implements OnInit {
 
     // we not need git id and service for product only need resolver
     // const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
-    // this.errorMessage = resolvedData.error!;
+    // this.errorMessage = resolvedData.error;
     // this.onProductRetrieved(resolvedData.product!);
 
     // read data as subscribe not property
     this.route.data.subscribe(data => {
       const resolvedData: ProductResolved = data["Product"];
-      this.errorMessage = resolvedData.error!;
-      this.onProductRetrieved(resolvedData.product!);
-    });
+      if (resolvedData && resolvedData.error && resolvedData.product) {
+        this.errorMessage = String(resolvedData.error);
+        this.onProductRetrieved(resolvedData.product);
+      }
+    }); 
   }
   getProduct(id: number): void {
     this.productService.getProduct(id).subscribe({
@@ -38,10 +40,11 @@ export class ProductUpdateComponent implements OnInit {
       error: err => this.errorMessage = err
     });
   }
-  onProductRetrieved(product: Product): void {
+  onProductRetrieved(product: Product | null): void {
     this.product = product;
     if (!this.product) {
-      this.pageTitle = 'No product found';
+      //this.pageTitle = 'No product found';
+      this.pageTitle = 'Add Product';
     } else {
       if (this.product.id === 0) {
         this.pageTitle = 'Add Product';
@@ -65,6 +68,7 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
   saveProduct(): void {
+    debugger
     if (this.product) {
       if (this.product.id === 0) {
         this.productService.createProduct(this.product).subscribe({

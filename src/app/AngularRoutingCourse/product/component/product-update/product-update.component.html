@@ -2,7 +2,8 @@
     <div class="card-header">
         {{pageTitle}}
     </div>
-    <div class="card-body" *ngIf="product">
+    <!-- <div class="card-body" *ngIf="product"> -->
+    <div class="card-body">
         <div class="wizard">
             <a [routerLink]="['info']" routerLinkActive="active">Basic Information</a>
             <a [routerLink]="['tags']" routerLinkActive="active">Search Tags</a>

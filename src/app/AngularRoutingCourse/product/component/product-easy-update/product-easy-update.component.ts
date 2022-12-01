@@ -11,8 +11,8 @@ import { ProductService } from '../../service/product.service';
 })
 export class ProductEasyUpdateComponent implements OnInit {
   pageTitle = 'Product Edit';
-  errorMessage = '';
-  product: Product | null = null;
+  errorMessage?: string;
+  product: Product | null=null;
   constructor(private productService: ProductService,
     private messageService: MessageService, private route: ActivatedRoute,
     private router: Router) { }
@@ -22,14 +22,17 @@ export class ProductEasyUpdateComponent implements OnInit {
 
     // we not need git id and service for product only need resolver
     // const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
-    // this.errorMessage = resolvedData.error!;
+    // this.errorMessage = resolvedData.error;
     // this.onProductRetrieved(resolvedData.product!);
 
     // read data as subscribe not property
     this.route.data.subscribe(data => {
       const resolvedData: ProductResolved = data["Product"];
+      ///if (resolvedData !== undefined) { 
+      debugger
+      this.onProductRetrieved(resolvedData?.product);
       this.errorMessage = resolvedData.error!;
-      this.onProductRetrieved(resolvedData.product!);
+      //}
     });
   }
   getProduct(id: number): void {
@@ -38,7 +41,7 @@ export class ProductEasyUpdateComponent implements OnInit {
       error: err => this.errorMessage = err
     });
   }
-  onProductRetrieved(product: Product): void {
+  onProductRetrieved(product: Product | null): void {
     this.product = product;
     if (!this.product) {
       this.pageTitle = 'No product found';

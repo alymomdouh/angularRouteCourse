@@ -9,34 +9,37 @@ import { ProductService } from '../../service/product.service';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
+
+  pageTitle = 'Product Detail';
+  product: Product | null = null;
+  errorMessage?: string;
+  constructor(private productService: ProductService, private route: ActivatedRoute,
+    private router: Router) { }
   ngOnInit(): void {
     // const id = +this.route.snapshot.paramMap.get('id')!;
     // this.getProduct(id);
 
     // we not need git id and service for product only need resolver
     // const resolvedData: ProductResolved = this.route.snapshot.data["Product"];
-    // this.errorMessage = resolvedData.error!;
+    // this.errorMessage = resolvedData.error;
     // this.onProductRetrieved(resolvedData.product!);
 
     // read data as subscribe not property
-    this.route.data.subscribe(data=>{
+    this.route.data.subscribe(data => {
       const resolvedData: ProductResolved = data["Product"];
-      this.errorMessage = resolvedData.error!;
-      this.onProductRetrieved(resolvedData.product!);
+      //if (resolvedData !== undefined) {
+        this.errorMessage = resolvedData.error;
+        this.onProductRetrieved(resolvedData.product!);
+      //}
     });
   }
-  pageTitle = 'Product Detail';
-  product: Product | null = null;
-  errorMessage = '';
-  constructor(private productService: ProductService, private route: ActivatedRoute,
-    private router: Router) { }
   getProduct(id: number): void {
     this.productService.getProduct(id).subscribe({
       next: product => this.onProductRetrieved(product),
       error: err => this.errorMessage = err
     });
   }
-  onProductRetrieved(product: Product): void {
+  onProductRetrieved(product: Product| null): void {
     this.product = product;
     if (this.product) {
       this.pageTitle = `Product Detail: ${this.product.productName}`;

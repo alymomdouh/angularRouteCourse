@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: "easy-update/:id",
     component: ProductEasyUpdateComponent,
-    resolve: { Product: ProductResolverService } 
+    resolve: { Product: ProductResolverService }
   },
   {
     path: "update/:id",
@@ -38,7 +38,8 @@ const routes: Routes = [
       { path: 'tags', component: ProductUpdateTagsComponent }
     ]
   },
-  { path: "create", component: ProductUpdateComponent }
+  { path: "create", component: ProductUpdateComponent },
+  { path: "create-easy", component: ProductEasyUpdateComponent }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

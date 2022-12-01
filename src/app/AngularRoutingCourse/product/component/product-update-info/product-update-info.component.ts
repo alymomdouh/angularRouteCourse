@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Product, ProductResolved } from '../../model/product';
 
 @Component({
   selector: 'app-product-update-info',
@@ -8,10 +9,19 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-update-info.component.css']
 })
 export class ProductUpdateInfoComponent implements OnInit {
-  @ViewChild(NgForm) productForm?: NgForm;
+  @ViewChild(NgForm, { static: false }) productForm!: NgForm;
   errorMessage = '';
-  product = { id: 1, productName: 'test', productCode: 'test', description: 'test' };
+  product: Product | null = null;
   constructor(private route: ActivatedRoute) { }
   ngOnInit(): void {
+    this.route.parent?.data.subscribe(data => {
+      if (this.productForm) {
+        this.productForm.reset();
+      }
+      const resolvedData: ProductResolved = data["Product"];
+      this.errorMessage = resolvedData.error!;
+      this.product = resolvedData.product;
+      debugger
+    });
   }
 }
