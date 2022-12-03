@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'AngularRoutingCourse',
     loadChildren: () => import('./AngularRoutingCourse/home/home.module').then(m => m.HomeModule)
   },
+  {
+    path: 'AngularReactiveFormsCourse',
+    loadChildren: () => import('./AngularReactiveFormsCourse/angular-reactive-forms-course.module').then(m => m.AngularReactiveFormsCourseModule)
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 
